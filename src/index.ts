@@ -101,7 +101,7 @@ function ViteImageOptimizer(optionsParam: Options = {}): Plugin {
   const applySharp = async (filePath: string, buffer: Buffer): Promise<Buffer> => {
     const sharp = (await import('sharp')).default;
     const extName: string = extname(filePath).replace('.', '').toLowerCase();
-    return await sharp(buffer, { animated: extName === 'gif' })
+    return await sharp(buffer, { animated: extName === 'gif' || extName === 'webp' })
       .toFormat(extName as keyof FormatEnum, options[extName])
       .toBuffer();
   };
